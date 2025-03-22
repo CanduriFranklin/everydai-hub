@@ -1,5 +1,5 @@
 import streamlit as st
 
-st.title("Entertainment Recommendations")
-
-st.write("This is the entertainment recommendations page.")
+def show():
+    st.title("Entertainment")
+    st.write("This is the Entertainment page.")

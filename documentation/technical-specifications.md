@@ -1,6 +1,6 @@
 # Technical Specifications
 
-This document provides the technical specifications for the Everydai-Hub project.
+This document provides the technical specifications and requirements for the Everydai-Hub project.
 
 ## Project Phases
 
@@ -16,6 +16,7 @@ This document provides the technical specifications for the Everydai-Hub project
 - Set up the database with SQLAlchemy.
 - Implement JWT authentication.
 - Integrate Nebius AI Studio.
+- Integrate various models for different functionalities.
 
 ### Phase 3: Frontend Development
 
@@ -38,3 +39,41 @@ This document provides the technical specifications for the Everydai-Hub project
 ## Integration
 
 Each phase is integrated to ensure seamless communication between the backend and frontend, and to leverage AI capabilities for enhanced user experience.
+
+## Backend
+
+- **Framework**: FastAPI
+- **Database**: PostgreSQL
+- **ORM**: SQLAlchemy
+- **AI Integration**: Nebius AI SDK
+- **Models**:
+  - Instructional Model: `deepseek-ai/DeepSeek-V3`
+  - Meal Planner: `meta-llama/Llama-3.2-3B-Instruct`
+  - Smart Calendar: `microsoft/Phi-3.5-mini-instruct`
+  - Health Tracker: `aaditya/Llama3-OpenBioLLM-8B`
+  - Entertainment Recommendations: `mistralai/Mixtral-8x7B-Instruct-v0.1`
+  - Financial Management: `microsoft/Phi-3.5-MoE-instruct`
+  - Digital Wellbeing: `microsoft/Phi-3-mini-4k-instruct`
+
+## Frontend
+
+- **Framework**: Streamlit
+
+## Monitoring
+
+- **Metrics**: Prometheus
+- **Visualization**: Grafana
+
+## Deployment
+
+- **Docker**: Docker and Docker Compose are used for containerization and orchestration.
+- **Scripts**: Deployment and setup scripts are located in the `scripts/` directory.
+
+## Environment Variables
+
+- **API_KEY**: API key for external services.
+- **DATABASE_URL**: URL for the PostgreSQL database.
+- **NEBIUS_AI_API_KEY**: API key for Nebius AI Studio.
+- **NEBIUS_AI_ENDPOINT**: Endpoint for Nebius AI Studio.
+
+Ensure that the `.env` file is properly configured with the necessary environment variables before running the application.

@@ -1,35 +1,88 @@
 # Software Structure
 
-This document outlines the software structure of the Everydai-Hub project.
+This document provides an overview of the project structure for the Everydai-Hub project.
 
-## Backend
+## Project Structure
 
-The backend is built using FastAPI and includes the following components:
+```
+.env
+.git/
+.gitignore
+backend/
+    Dockerfile
+    requirements.txt
+    app/
+        __init__.py
+        main.py
+        api/
+            __init__.py
+            calendar.py
+            digital_wellness.py
+            entertainment.py
+            finance.py
+            health.py
+            meals.py
+            productivity.py
+        database/
+            __init__.py
+            session.py
+        models/
+            __init__.py
+            meal.py
+            task.py
+            user.py
+        services/
+            __init__.py
+            auth.py
+            nebius_ai.py
+custom-intructions.md
+docker-compose.yml
+documentation/
+    end-user-guide.md
+    README.md
+    software-architecture.md
+    software-structure.md
+    technical-specifications.md
+frontend/
+    app.py
+    Dockerfile
+    requirements.txt
+    pages/
+        calendar.py
+        digital_wellness.py
+        entertainment.py
+        finance.py
+        health.py
+        meals.py
+        productivity.py
+main.py
+README.md
+scripts/
+    deploy.sh
+    setup_db.py
+venv/
+```
 
-- **API Endpoints**: Defined in the `api` directory.
-- **Database Models**: Defined in the `models` directory.
-- **Services**: Business logic and integrations in the `services` directory.
-- **Database Configuration**: Set up in the `database` directory.
+## Description of Key Directories and Files
 
-## Frontend
+- **backend/**: Contains the backend code for the project.
+  - **Dockerfile**: Docker configuration for the backend.
+  - **requirements.txt**: Python dependencies for the backend.
+  - **app/**: Main application code.
+    - **api/**: API endpoints for different functionalities.
+    - **database/**: Database configuration and session management.
+    - **models/**: Database models.
+    - **services/**: Service layer for business logic.
+- **custom-intructions.md**: Custom instructions for the project.
+- **docker-compose.yml**: Docker Compose configuration.
+- **documentation/**: Project documentation.
+- **frontend/**: Contains the frontend code for the project.
+  - **Dockerfile**: Docker configuration for the frontend.
+  - **requirements.txt**: Python dependencies for the frontend.
+  - **pages/**: Frontend pages for different functionalities.
+- **main.py**: Entry point for the application.
+- **README.md**: Project README file.
+- **scripts/**: Utility scripts for deployment and setup.
+- **venv/**: Virtual environment for the project.
 
-The frontend is built using Streamlit and includes the following components:
-
-- **Main Application**: Entry point in `app.py`.
-- **Pages**: Individual pages for each functionality in the `pages` directory.
-
-## Database
-
-The database is configured using SQLAlchemy and PostgreSQL. Models are defined for users, tasks, and meals.
-
-## AI Integration
-
-Nebius AI Studio is integrated to provide AI-powered features. The integration logic is implemented in the `services/nebius_ai.py` file.
-
-## Deployment
-
-The application is containerized using Docker. Docker Compose is used to manage the services, including the backend, frontend, and database.
-
-## Monitoring
-
-Prometheus and Grafana are used to monitor the performance and health of the application.
+This structure ensures a clear separation of concerns and modularity, making the project easier to maintain and extend.

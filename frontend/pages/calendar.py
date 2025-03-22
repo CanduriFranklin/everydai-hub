@@ -1,5 +1,5 @@
 import streamlit as st
 
-st.title("Smart Calendar")
-
-st.write("This is the smart calendar page.")
+def show():
+    st.title("Calendar")
+    st.write("This is the Calendar page.")

@@ -1,5 +1,5 @@
 import streamlit as st
 
-st.title("Productivity Assistant")
-
-st.write("This is the productivity assistant page.")
+def show():
+    st.title("Productivity")
+    st.write("This is the Productivity page.")
