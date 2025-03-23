@@ -1,5 +1,6 @@
 import os
 from openai import OpenAI
+import requests
 
 SMART_CALENDAR_API_KEY = os.getenv("SMART_CALENDAR_API_KEY")
 SMART_CALENDAR_ENDPOINT = "https://api.microsoft.com/v1/smart_calendar"

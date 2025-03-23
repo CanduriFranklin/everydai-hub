@@ -1,5 +1,6 @@
 import os
 from openai import OpenAI
+import requests
 
 FINANCIAL_MANAGEMENT_API_KEY = os.getenv("FINANCIAL_MANAGEMENT_API_KEY")
 FINANCIAL_MANAGEMENT_ENDPOINT = "https://api.microsoft.com/v1/financial_management"
