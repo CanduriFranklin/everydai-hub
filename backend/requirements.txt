@@ -4,3 +4,4 @@ passlib[bcrypt]
 python-dotenv
 requests
 openai
+uvicorn
