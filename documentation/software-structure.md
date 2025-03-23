@@ -4,7 +4,7 @@ This document provides an overview of the project structure for the Everydai-Hub
 
 ## Project Structure
 
-```
+```plaintext
 .env
 .git/
 .gitignore

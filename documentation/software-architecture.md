@@ -53,17 +53,17 @@ graph TD;
 
 ### Data Management
 
-3. **Database (PostgreSQL)**: The backend interacts with the PostgreSQL database to store and retrieve data. SQLAlchemy is used as the ORM to define and manage the database models.
+1. **Database (PostgreSQL)**: The backend interacts with the PostgreSQL database to store and retrieve data. SQLAlchemy is used as the ORM to define and manage the database models.
 
 ### AI Integration
 
-4. **Nebius AI SDK**: The backend integrates with Nebius AI Studio using the Nebius AI SDK to perform AI-powered inferences. The results are then sent back to the frontend for display.
+1. **Nebius AI SDK**: The backend integrates with Nebius AI Studio using the Nebius AI SDK to perform AI-powered inferences. The results are then sent back to the frontend for display.
 
-### Monitoring
+### Performance Monitoring
 
-5. **Prometheus**: The backend sends metrics to Prometheus for monitoring the performance and health of the application.
+1. **Prometheus**: The backend sends metrics to Prometheus for monitoring the performance and health of the application.
 
-6. **Grafana**: Grafana is used to visualize the metrics collected by Prometheus, providing insights into the application's performance.
+2. **Grafana**: Grafana is used to visualize the metrics collected by Prometheus, providing insights into the application's performance.
 
 ## Conclusion
 

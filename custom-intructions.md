@@ -1,11 +1,11 @@
-Project Title: Everydai-Hub
+# Project Title: Everydai-Hub
 
 Sub-title: Application powered by artificial intelligence
 
 Phase 1: Initial Configuration
 Create the Repository Structure:
 
-"Create the folder and file structure for the Everydai Hub project according to the following scheme: 
+"Create the folder and file structure for the Everydai Hub project according to the following scheme:
 everydai-hub/
 ├── backend/
 │ ├── app/
@@ -55,65 +55,65 @@ everydai-hub/
 
 Phase 1: Initial Configuration:
 
-Configurar el Entorno Virtual
+Configure the Virtual Environment
 
-Configura un entorno virtual para el backend y el frontend usando venv o poetry.
+Set up a virtual environment for the backend and frontend using venv or poetry.
 
-Instalar Dependencias:
+Install Dependencies:
 
-Instala las dependencias necesarias para el backend (FastAPI, Nebius AI SDK, SQLAlchemy) y el frontend (Streamlit).
+Install the necessary dependencies for the backend (FastAPI, Nebius AI SDK, SQLAlchemy) and the frontend (Streamlit).
 
-Fase 2: Desarrollo del Backend
-Configurar FastAPI:
+Phase 2: Backend Development
+Configure FastAPI:
 
-Crea un archivo main.py en el backend que configure FastAPI y defina un endpoint básico de prueba.
+Create a main.py file in the backend that configures FastAPI and defines a basic test endpoint.
 
-Configurar la Base de Datos:
+Configure the Database:
 
-Configura SQLAlchemy para conectarse a una base de datos PostgreSQL y define los modelos de usuario, tareas y comidas.
+Configure SQLAlchemy to connect to a PostgreSQL database and define the user, task, and meal models.
 
-Implementar Autenticación:
+Implement Authentication:
 
-Implementa la autenticación JWT en FastAPI, incluyendo endpoints para registro e inicio de sesión.
+Implement JWT authentication in FastAPI, including endpoints for registration and login.
 
-Integrar Nebius AI Studio:
+Integrate Nebius AI Studio:
 
-Crea un servicio en services/nebius_ai.py que se conecte a Nebius AI Studio y realice inferencias para las funcionalidades de IA.
+Create a service in services/nebius_ai.py that connects to Nebius AI Studio and performs inferences for AI features.
 
-Fase 3: Desarrollo del Frontend
-Configurar Streamlit:
+Phase 3: Frontend Development
+Configure Streamlit:
 
-Crea un archivo app.py en el frontend que configure Streamlit y muestre una página de inicio.
+Create an app.py file on the frontend that configures Streamlit and displays a home page.
 
-Crear Páginas para Cada Funcionalidad:
-Crea una página en Streamlit para cada funcionalidad (productividad, comidas, calendario, etc.) y conéctala con los endpoints del backend.
+Create Pages for Each Feature:
+Create a page in Streamlit for each feature (productivity, meals, calendar, etc.) and connect it to the backend endpoints.
 
-Integrar Nebius AI en el Frontend:
+Integrate Nebius AI on the Frontend:
 
-Muestra los resultados de las inferencias de Nebius AI en las páginas correspondientes del frontend.
+Display the results of Nebius AI inferences on the corresponding frontend pages.
 
-Fase 4: Pruebas y Optimización
-Pruebas Unitarias:
+Phase 4: Testing and Optimization
+Unit Testing:
 
-Escribe pruebas unitarias para los endpoints de FastAPI usando pytest.
+Write unit tests for the FastAPI endpoints using pytest.
 
-Pruebas de Integración:
+Integration Testing:
 
-Prueba la comunicación entre el frontend y el backend, asegurando que los datos fluyan correctamente.
+Test communication between the frontend and backend, ensuring proper data flow.
 
-Optimización:
+Optimization:
 
-Optimiza las consultas a la base de datos y mejora el rendimiento de los modelos de IA.
+Optimize database queries and improve the performance of AI models.
 
-Fase 5: Despliegue y Monitoreo
-Configurar Docker:
+Phase 5: Deployment and Monitoring
+Configure Docker:
 
-Crea un Dockerfile para el backend y el frontend, y configura docker-compose.yml para gestionar los servicios.
+Create a Dockerfile for the backend and frontend, and configure docker-compose.yml to manage services.
 
-Desplegar en la Nube:
+Deploy to the Cloud:
 
-Despliega la aplicación en Nebius Cloud o Render, configurando dominios y certificados SSL.
+Deploy the application to Nebius Cloud or Render, configuring domains and SSL certificates.
 
-Monitorear la Aplicación:
+Monitor the Application:
 
-Configura Prometheus y Grafana para supervisar el rendimiento de la aplicación.
+Configure Prometheus and Grafana to monitor application performance.
