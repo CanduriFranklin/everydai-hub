@@ -1,40 +1,44 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import requests
+
+def show():
+    entertainment()
 
 def entertainment():
-	st.title("Entertainment Recommendations")
-	st.write("Receive personalized movie, TV, book, or music recommendations based on your mood and preferences.")
+    st.title("Entertainment Recommendations")
+    st.write("Receive personalized movie, TV, book, or music recommendations based on your mood and preferences.")
 
 # Form to capture data
 with st.form("entertainment_form"):
-	st.subheader("Entertainment Preferences")
+    st.subheader("Entertainment Preferences")
 
 # Mood
 mood_mood = st.selectbox(
-	"Mood",
-	options=["Happy", "Sad", "Relaxed", "Energetic"],
-	help="Select your current mood."
+    "Mood",
+    options=["Happy", "Sad", "Relaxed", "Energetic"],
+    help="Select your current mood."
 )
 
 # Entertainment Preferences
 preferences = st.text_area(
-	"Preferences (e.g., movie genre, favorite authors)",
-	help="Describe your entertainment preferences."
+    "Preferences (e.g., movie genre, favorite authors)",
+    help="Describe your entertainment preferences."
 )
 
 # Preferred Time
 preferred_time = st.selectbox(
-	"Preferred time",
-	options=["Morning", "Afternoon", "Evening"],
-	help="Select your preferred time to enjoy entertainment."
+    "Preferred time",
+    options=["Morning", "Afternoon", "Evening"],
+    help="Select your preferred time to enjoy entertainment."
 )
 
 # Entertainment type
 entertainment_type = st.multiselect(
-	"Entertainment type",
-	options=["Movies", "TV Shows", "Books", "Music"],
-	help="Select your preferred type of entertainment."
+    "Entertainment type",
+    options=["Movies", "TV Shows", "Books", "Music"],
+    help="Select your preferred type of entertainment."
 )
 
 # Button to submit the form
@@ -42,17 +46,27 @@ submit = st.form_submit_button("Generate Recommendations")
 
 # Process the data and display results
 if submit:
-	st.success("Generated recommendations:")
+    # Make API call to backend
+    response = requests.post("http://backend:8000/api/entertainment", json={
+        "preferences": preferences.split(",")
+    })
+    if response.status_code == 200:
+        recommendations = response.json().get("recommendations", [])
+        st.success("Generated recommendations:")
+        for recommendation in recommendations:
+            st.write(f"- {recommendation}")
+    else:
+        st.error("Failed to generate recommendations. Please try again.")
 
 # Example data for visualizations
 recommendations = {
-	"Type": ["Movies", "TV Shows", "Books", "Music"],
-	"Recommendation": [
-		f"Movie: 'Spirited Away' (Mood: {mood_mood})",
-		f"Series: 'Stranger Things' (Time: {preferred_time})",
-		f"Book: 'One Hundred Years of Solitude' (Preferences: {preferences})",
-		f"Music: Relaxing Jazz Playlist (Mood: {mood_mood})"
-	]
+    "Type": ["Movies", "TV Shows", "Books", "Music"],
+    "Recommendation": [
+        f"Movie: 'Spirited Away' (Mood: {mood_mood})",
+        f"Series: 'Stranger Things' (Time: {preferred_time})",
+        f"Book: 'One Hundred Years of Solitude' (Preferences: {preferences})",
+        f"Music: Relaxing Jazz Playlist (Mood: {mood_mood})"
+    ]
 }
 df_recommendations = pd.DataFrame(recommendations)
 
@@ -80,4 +94,4 @@ st.table(df_recommendations)
 
 # Run the entertainment sheet
 if __name__ == "__main__":
-	entertainment()
+    show()

@@ -2,6 +2,6 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.get("/meals")
-def get_meals():
-    return {"message": "Meal planner"}
+@router.get("/")
+def read_meals():
+    return {"message": "Meals API"}

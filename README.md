@@ -4,7 +4,6 @@
 
 ### Project Structure
 
-```
 everydai-hub/
 ├── backend/
 │ ├── app/
@@ -23,7 +22,14 @@ everydai-hub/
 │ │ │ ├── __init__.py
 │ │ │ ├── user.py
 │ │ │ ├── task.py
-│ │ │ └── meal.py
+│ │ │ ├── meal.py
+│ │ │ ├── calendar.py
+│ │ │ ├── digital_wellness.py
+│ │ │ ├── entertainment.py
+│ │ │ ├── finance.py
+│ │ │ ├── health.py
+│ │ │ ├── meals.py
+│ │ │ ├── productivity.py
 │ │ ├── services/
 │ │ │ ├── __init__.py
 │ │ │ ├── nebius_ai.py
@@ -31,8 +37,18 @@ everydai-hub/
 │ │ ├── database/
 │ │ │ ├── __init__.py
 │ │ │ └── session.py
+│ │ ├── app_behavior.py
 │ ├── requirements.txt
-│ └── Dockerfile
+│ ├── Dockerfile
+│ └── tests/
+│ │ ├── __init__.py
+│ │ ├── test_calendar.py
+│ │ ├── test_digital_wellness.py
+│ │ ├── test_entertainment.py
+│ │ ├── test_finance.py
+│ │ ├── test_health.py
+│ │ ├── test_meals.py
+│ │ ├── test_productivity.py
 ├── frontend/
 │ ├── app.py
 │ ├── pages/
@@ -42,7 +58,8 @@ everydai-hub/
 │ │ ├── health.py
 │ │ ├── entertainment.py
 │ │ ├── finance.py
-│ │ └── digital_wellness.py
+│ │ ├── digital_wellness.py
+│ │ ├── visualize_behavior.py
 │ ├── requirements.txt
 │ └── Dockerfile
 ├── scripts/
@@ -50,8 +67,13 @@ everydai-hub/
 │ └── deploy.sh
 ├── docker-compose.yml
 ├── README.md
-└── .gitignore
-```
+├── .gitignore
+└── documentation/
+    ├── README.md
+    ├── end-user-guide.md
+    ├── software-architecture.md
+    ├── software-structure.md
+    ├── technical-specifications.md
 
 ### Setup Instructions
 
@@ -59,29 +81,24 @@ everydai-hub/
 
 1. Create a virtual environment and activate it.
 2. Install the dependencies:
-    ```bash
+bash
     pip install -r backend/requirements.txt
-    ```
+
 3. Run the FastAPI application:
-    ```bash
+    bash
     uvicorn backend.app.main:app --reload
-    ```
 
 #### Frontend
 
 1. Create a virtual environment and activate it.
 2. Install the dependencies:
-    ```bash
+bash
     pip install -r frontend/requirements.txt
-    ```
+
 3. Run the Streamlit application:
-    ```bash
+bash
     streamlit run frontend/app.py
-    ```
 
 #### Docker
 
 1. Build and run the services using Docker Compose:
-    ```bash
-    docker-compose up --build
-    ```

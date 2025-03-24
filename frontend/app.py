@@ -1,14 +1,54 @@
 import streamlit as st
 import os
+import sqlalchemy as db
+from pages import calendar, digital_wellness, entertainment, finance, health, meals, productivity
 
 # Page configuration
 st.set_page_config(page_title="Everydai-Hub", layout="wide")
+
+# Notify when the application starts successfully
+st.success("Application started successfully.")
+
+# Database connection
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://admin:admin123@db:5433/everydai_db")
+engine = db.create_engine(DATABASE_URL)
+SessionLocal = db.orm.sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Notify when the database connects successfully
+try:
+    session = SessionLocal()
+    st.session_state['db_session'] = session
+    st.success("Connected to the database successfully.")
+except Exception as e:
+    st.error(f"Failed to connect to the database: {e}")
+
+# Notify when the application connects to Nebius AI Studio successfully
+try:
+    NEBIUS_AI_API_KEY = os.getenv("NEBIUS_AI_API_KEY")
+    NEBIUS_AI_ENDPOINT = os.getenv("NEBIUS_AI_ENDPOINT")
+    if NEBIUS_AI_API_KEY and NEBIUS_AI_ENDPOINT:
+        st.success("Connected to Nebius AI Studio successfully.")
+    else:
+        st.warning("Nebius AI Studio connection details are missing.")
+except Exception as e:
+    st.error(f"Failed to connect to Nebius AI Studio: {e}")
 
 # Session state to handle authentication and navigation
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 if 'current_page' not in st.session_state:
     st.session_state['current_page'] = 'Welcome'
+
+# Page mapping
+page_mapping = {
+    'Calendar': calendar,
+    'Digital_Wellness': digital_wellness,
+    'Entertainment': entertainment,
+    'Finance': finance,
+    'Health': health,
+    'Meals': meals,
+    'Productivity': productivity
+}
 
 # Welcome and registration page
 
@@ -39,6 +79,13 @@ def welcome():
                 # Logic to verify credentials would go here
                 st.session_state['logged_in'] = True
                 st.experimental_rerun()
+                # Connect to the database
+                try:
+                    session = SessionLocal()
+                    st.session_state['db_session'] = session
+                    st.success("Connected to the database successfully.")
+                except Exception as e:
+                    st.error(f"Failed to connect to the database: {e}")
 
 # Main page with the 7 functionalities
 
@@ -69,7 +116,10 @@ if st.session_state['logged_in']:
     if st.session_state['current_page'] == 'Main':
         main_page()
     else:
-        page_module = __import__(f"pages.{st.session_state['current_page'].lower()}", fromlist=['show'])
-        page_module.show()
+        page_module = page_mapping.get(st.session_state['current_page'])
+        if page_module:
+            page_module.show()
+        else:
+            st.error("Page not found.")
 else:
     welcome()

@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
+import requests
 
 def calendar():
 	st.title("Smart Calendar")
@@ -39,7 +40,19 @@ def calendar():
 
 	# Process the data and display results
 	if submit:
-		st.success("Generated Agenda:")
+		# Make API call to backend
+		response = requests.post("http://backend:8000/api/calendar", json={
+			"events": events,
+			"event_duration": event_duration,
+			"schedule_preferences": schedule_preferences
+		})
+		if response.status_code == 200:
+			agenda = response.json().get("agenda", [])
+			st.success("Generated Agenda:")
+			for item in agenda:
+				st.write(f"- {item}")
+		else:
+			st.error("Failed to generate agenda. Please try again.")
 
 		# Process entered events
 		events_list = [event.strip() for event in events.split("\n") if event.strip()]

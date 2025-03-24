@@ -1,44 +1,48 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import requests
+
+def show():
+    digital_wellbeing()
 
 def digital_wellbeing():
-	st.title("Digital Wellbeing")
-	st.write("Monitor your digital usage and receive recommendations to promote healthy digital habits.")
+    st.title("Digital Wellbeing")
+    st.write("Monitor your digital usage and receive recommendations to promote healthy digital habits.")
 
 # Form to capture data
 with st.form("digital_wellbeing_form"):
-	st.subheader("Digital Usage")
+    st.subheader("Digital Usage")
 
 # Time on social media
 social_time = st.number_input(
-	"Time on social media (hours/day)",
-	min_value=0,
-	max_value=24,
-	help="Enter the time you spend on social media each day."
+    "Time on social media (hours/day)",
+    min_value=0,
+    max_value=24,
+    help="Enter the time you spend on social media each day."
 )
 
 # Time on productivity apps
 productivity_time = st.number_input(
-	"Time on productivity apps (hours/day)",
-	min_value=0,
-	max_value=24,
-	help="Enter the time you spend on productivity apps every day."
+    "Time on productivity apps (hours/day)",
+    min_value=0,
+    max_value=24,
+    help="Enter the time you spend on productivity apps every day."
 )
 
 # Notification Frequency
 notification_frequency = st.selectbox(
-	"Notification Frequency",
-	options=["High", "Medium", "Low"],
-	help="Select the frequency of notifications you receive."
+    "Notification Frequency",
+    options=["High", "Medium", "Low"],
+    help="Select the frequency of notifications you receive."
 )
 
 # Digital Wellbeing Goals
 st.subheader("Digital Wellbeing Goals")
 wellbeing_goals = st.multiselect(
-	"Digital Wellbeing Goals",
-	options=["Reduce time on social media", "Limit notifications", "Increase time on productivity"],
-	help="Select your digital wellbeing goals."
+    "Digital Wellbeing Goals",
+    options=["Reduce time on social media", "Limit notifications", "Increase time on productivity"],
+    help="Select your digital wellbeing goals."
 )
 
 # Button to submit the form
@@ -46,12 +50,25 @@ submit = st.form_submit_button("Generate Recommendations")
 
 # Process the data and display results
 if submit:
-	st.success("Recommendations generated:")
+    # Make API call to backend
+    response = requests.post("http://backend:8000/api/digital_wellness", json={
+        "social_time": social_time,
+        "productivity_time": productivity_time,
+        "notification_frequency": notification_frequency,
+        "wellbeing_goals": wellbeing_goals
+    })
+    if response.status_code == 200:
+        recommendations = response.json().get("recommendations", [])
+        st.success("Recommendations generated:")
+        for recommendation in recommendations:
+            st.write(f"- {recommendation}")
+    else:
+        st.error("Failed to generate recommendations. Please try again.")
 
 # Example data for visualizations
 digital_usage_data = {
-	"Activity": ["Social Media", "Productivity"],
-	"Time (hours)": [social_time, productivity_time]
+    "Activity": ["Social Media", "Productivity"],
+    "Time (hours)": [social_time, productivity_time]
 }
 df_digital_use = pd.DataFrame(digital_usage_data)
 
@@ -74,16 +91,16 @@ st.pyplot(fig)
 # Personalized Recommendations
 st.subheader("Personalized Recommendations")
 if social_time > 2:
-	st.write("- **Social Media:** Limit your time on social media to 2 hours a day.")
+    st.write("- **Social Media:** Limit your time on social media to 2 hours a day.")
 if productivity_time < 4:
-	st.write("- **Productivity:** Increase your time on productivity apps to at least 4 hours a day.")
+    st.write("- **Productivity:** Increase your time on productivity apps to at least 4 hours a day.")
 if notification_frequency == "High":
-	st.write("- **Notifications:** Reduce the frequency of notifications to minimize distractions.")
+    st.write("- **Notifications:** Reduce the frequency of notifications to minimize distractions.")
 if "Reduce time on social media" in wellbeing_goals:
-	st.write("- **Goal:** Set reminders to take breaks from social media.")
+    st.write("- **Goal:** Set reminders to take breaks from social media.")
 if "Limit notifications" in wellbeing_goals:
-	st.write("- **Goal:** Turn off non-essential notifications on your device.")
+    st.write("- **Goal:** Turn off non-essential notifications on your device.")
 
 # Run the Digital Wellness Sheet
 if __name__ == "__main__":
-	digital_wellbeing()
+    show()

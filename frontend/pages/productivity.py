@@ -3,53 +3,53 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def productivity():
-	st.title("Custom Productivity Wizard")
-	st.write("Capture your work habits and receive personalized recommendations to improve your productivity.")
+    st.title("Custom Productivity Wizard")
+    st.write("Capture your work habits and receive personalized recommendations to improve your productivity.")
 
 # Form to capture data
 with st.form("productivity_form"):
-	st.subheader("Input Data")
+    st.subheader("Input Data")
 
 # Daily work hours
 work_hours = st.number_input(
-	"Daily work hours",
-	min_value=1,
-	max_value=24,
-	help="Enter the number of hours you work per day."
+    "Daily work hours",
+    min_value=1,
+    max_value=24,
+    help="Enter the number of hours you work per day."
 )
 
 # To-do tasks
 to_do_tasks = st.text_area(
-	"To-do tasks (comma-separated)",
-	help="List your to-do tasks, separated by commas."
+    "To-do tasks (comma-separated)",
+    help="List your to-do tasks, separated by commas."
 )
 
 # Break preferences
 st.subheader("Break Preferences")
 break_duration = st.number_input(
-	"Duration of each break (minutes)",
-	min_value=5,
-	max_value=60,
-	value=15,
-	help="Duration in minutes of each break."
+    "Duration of each break (minutes)",
+    min_value=5,
+    max_value=60,
+    value=15,
+    help="Duration in minutes of each break."
 )
 break_frequency = st.number_input(
-	"Break frequency (every X hours)",
-	min_value=1,
-	max_value=8,
-	value=2,
-	help="How many hours do you prefer to take a break?"
+    "Break frequency (every X hours)",
+    min_value=1,
+    max_value=8,
+    value=2,
+    help="How many hours do you prefer to take a break?"
 )
 
 # Daily/Weekly Goals
 st.subheader("Goals")
 daily_goals = st.text_area(
-	"Daily goals (comma-separated)",
-	help="List your daily goals, separated by commas."
+    "Daily goals (comma-separated)",
+    help="List your daily goals, separated by commas."
 )
 weekly_goals = st.text_area(
-	"Weekly goals (comma-separated)",
-	help="List your weekly goals, separated by commas."
+    "Weekly goals (comma-separated)",
+    help="List your weekly goals, separated by commas."
 )
 
 # Button to submit the form
@@ -57,7 +57,7 @@ submit = st.form_submit_button("Generate Recommendations")
 
 # Process the data and display results
 if submit:
-	st.success("Generated Recommendations:")
+    st.success("Generated Recommendations:")
 
 # Example data for visualizations
 tasks = to_do_tasks.split(",")
@@ -83,8 +83,8 @@ st.pyplot(fig)
 # Pending tasks table
 st.subheader("Pending Tasks")
 df_tasks = pd.DataFrame({
-	"Task": tasks,
-	"Priority": priorities[:len(tasks)]
+    "Task": tasks,
+    "Priority": priorities[:len(tasks)]
 })
 st.table(df_tasks)
 
@@ -97,4 +97,4 @@ st.write(f"- **Weekly Goals:** Plan time for {weekly_goals.split(',')[0]} this w
 
 # Run the productivity spreadsheet
 if __name__ == "__main__":
-	productivity()
+    productivity()
